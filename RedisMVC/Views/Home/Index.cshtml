@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    function ObtenerIFrame() {
+        let iframe = document.getElementById("iframe");
+        let resultado = httpGet("id1");
+        console.log(resultado);
+        iframe.srcdoc = resultado;
+        //iframe.src = "https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik">;
+    }
+
+    function httpGet(id) {
+        var baseUrl = "https://localhost:44349/id1?mnUniqueIdentifier=" + id;
+        var client = new XMLHttpRequest();
+        client.open('GET', baseUrl, false);
+        client.send(null);
+        if (client.status == 200)
+            return client.responseText;
+    }
+</script>
+
+<div class="text-center">
+    <iframe id="iframe" width=400" height="500"></iframe>
+    <button OnClick="ObtenerIFrame()">ObtenerIframe</button>
+</div>
